@@ -1,193 +1,309 @@
-# SinergiTani — Sistem Pengurangan Food Loss
+# 🌾 SinergiTani — Sistem Pengurangan Food Loss & Waste
 
-Platform digital multi-peran untuk mengurangi kehilangan dan pemborosan pangan (*food loss & waste*) pada rantai pasok pertanian Indonesia, dengan memanfaatkan pencocokan pasokan-permintaan berbasis AI, analitik prediktif, dan transparansi blockchain.
+<div align="center">
 
----
+![SinergiTani](https://img.shields.io/badge/SinergiTani-Food%20Loss%20Mitigation-16a34a?style=for-the-badge&logo=leaf&logoColor=white)
+![React](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178c6?style=flat-square&logo=typescript)
+![TensorFlow.js](https://img.shields.io/badge/TensorFlow.js-4.22-ff6f00?style=flat-square&logo=tensorflow)
+![License](https://img.shields.io/badge/License-Apache%202.0-green?style=flat-square)
 
-## Daftar Isi
+**Platform digital multi-peran untuk mengurangi kehilangan dan pemborosan pangan pada rantai pasok pertanian Indonesia.**
 
-- [Latar Belakang](#latar-belakang)
-- [Fitur Utama](#fitur-utama)
-- [Arsitektur & Teknologi](#arsitektur--teknologi)
-- [Struktur Proyek](#struktur-proyek)
-- [Peran Pengguna](#peran-pengguna)
-- [Algoritma & Model](#algoritma--model)
-- [Instalasi & Menjalankan](#instalasi--menjalankan)
-- [Variabel Lingkungan](#variabel-lingkungan)
-- [Lisensi](#lisensi)
+*Menghubungkan petani, pembeli, dinas pertanian, dan administrator dalam satu ekosistem cerdas berbasis AI, prediksi time-series, dan transparansi blockchain.*
+
+</div>
 
 ---
 
-## Latar Belakang
+## 📋 Daftar Isi
 
-Indonesia kehilangan jutaan ton hasil panen setiap tahun akibat ketidaksesuaian pasokan dan permintaan, infrastruktur logistik yang terbatas, serta minimnya informasi antar pelaku rantai pasok. SinergiTani hadir sebagai jembatan digital yang menghubungkan petani, pembeli, petugas dinas pertanian, dan administrator dalam satu ekosistem terintegrasi.
+- [Latar Belakang Masalah](#-latar-belakang-masalah)
+- [Demo & Screenshot](#-demo--screenshot)
+- [Fitur Lengkap](#-fitur-lengkap)
+- [Arsitektur Sistem](#-arsitektur-sistem)
+- [Teknologi yang Digunakan](#-teknologi-yang-digunakan)
+- [Struktur Proyek](#-struktur-proyek)
+- [Peran Pengguna (Roles)](#-peran-pengguna-roles)
+- [Alur Kerja Sistem](#-alur-kerja-sistem)
+- [Algoritma & Model AI/ML](#-algoritma--model-aiml)
+- [Komoditas yang Didukung](#-komoditas-yang-didukung)
+- [Data & State Management](#-data--state-management)
+- [Blockchain Ledger](#-blockchain-ledger)
+- [Instalasi & Setup](#-instalasi--setup)
+- [Variabel Lingkungan](#-variabel-lingkungan)
+- [Skrip yang Tersedia](#-skrip-yang-tersedia)
+- [Catatan Pengembangan Produksi](#-catatan-pengembangan-produksi)
+- [Lisensi](#-lisensi)
 
 ---
 
-## Fitur Utama
+## 🌍 Latar Belakang Masalah
 
-| Fitur | Deskripsi |
-|---|---|
-| **Pencocokan Pasokan–Permintaan** | Algoritma skor tertimbang (lokasi 40%, volume 30%, harga 30%) untuk mencocokkan laporan panen petani dengan permintaan pembeli secara real-time |
-| **Peta Interaktif** | Visualisasi geolokasi titik panen dan permintaan di seluruh Jawa menggunakan Leaflet.js; mendukung klik peta untuk mengisi form otomatis |
-| **Grading Kualitas (CV + TensorFlow.js)** | Model neural network ringan berbasis TensorFlow.js yang menganalisis gambar hasil panen dan menghasilkan nilai kualitas Grade A/B/C beserta confidence score |
-| **Prediksi Panen (Forecasting)** | Model *Holt's Double Exponential Smoothing* untuk memperkirakan volume panen 4 minggu ke depan per wilayah dan komoditas |
-| **Optimasi Rute Logistik (VRP)** | Algoritma *Nearest Neighbor* dengan batasan kapasitas kendaraan untuk merencanakan rute pengumpulan hasil panen secara efisien |
-| **Blockchain Ledger** | Setiap transaksi (rilis panen, rilis demand, kesepakatan kontrak) dicatat secara transparan dalam blok yang dapat diaudit |
-| **Simulasi Real-Time** | Sistem secara otomatis menghasilkan laporan panen dan permintaan baru setiap 25 detik untuk mensimulasikan aktivitas pasar langsung |
-| **Notifikasi Toast** | Umpan balik interaktif slide-in untuk setiap aksi pengguna maupun pembaruan data real-time |
+Indonesia kehilangan jutaan ton hasil panen setiap tahun akibat:
+
+- **Ketidakcocokan pasokan dan permintaan** — petani memanen tanpa kepastian pembeli, sementara pembeli tidak memiliki visibilitas stok yang akan datang
+- **Infrastruktur logistik yang terbatas** — rute pengiriman tidak efisien menyebabkan panen membusuk di perjalanan
+- **Minimnya informasi antar pelaku rantai pasok** — petani, pembeli, dan dinas pertanian beroperasi secara terpisah tanpa sinkronisasi data
+- **Tidak adanya traceability produk** — keaslian, asal-usul, dan kualitas produk tidak dapat diverifikasi, membuka peluang manipulasi tengkulak
+
+**SinergiTani** hadir sebagai jembatan digital yang menjawab semua tantangan ini sekaligus, dengan memanfaatkan kecerdasan buatan, analitik prediktif, dan teknologi blockchain dalam satu platform terintegrasi.
 
 ---
 
-## Arsitektur & Teknologi
+## 🎬 Demo & Screenshot
 
-### Frontend
-- **React 19** + **TypeScript** — Kerangka utama aplikasi
-- **Vite 6** — Build tool dan dev server
-- **Tailwind CSS 4** — Styling berbasis utility
-- **Framer Motion / Motion** — Animasi transisi antar tampilan
-- **Leaflet.js** — Peta interaktif geolokasi
-- **Lucide React** — Ikon SVG
-- **QRCode.React** — Generator kode QR untuk smart contract
+> Aplikasi berjalan sepenuhnya di browser — tidak memerlukan instalasi backend khusus untuk fitur inti.
 
-### AI & ML
-- **TensorFlow.js** — Inferensi model neural network di browser untuk grading kualitas tanaman
-- **@google/genai** — Integrasi Gemini API untuk fitur analitik berbasis AI
+**Cara mengakses semua fitur:**
+1. Jalankan `npm run dev`
+2. Buka `http://localhost:3000`
+3. Gunakan switcher peran di Navbar untuk berpindah antar perspektif (Petani / Pembeli / Dinas / Admin / Blockchain)
 
-### State Management
-- **React Context API** — `AppContext` sebagai state global terpusat
-- **localStorage** — Persistensi data sesi (panen, permintaan, bobot, blockchain)
+---
+
+## ✨ Fitur Lengkap
+
+### 🗺️ Peta Interaktif (InteractiveMap)
+- Visualisasi titik panen aktif (hijau) dan permintaan pembeli (coklat) secara real-time di peta Jawa
+- Dibangun dengan **Leaflet.js** dengan tile OpenStreetMap
+- Klik pada titik di peta untuk **mengisi koordinat form secara otomatis** (petani & pembeli)
+- Popup informatif menampilkan nama petani/koperasi, komoditas, volume, dan harga saat hover
+
+### 🌱 Dashboard Petani (FarmerView)
+- **Form laporan rencana tanam** lengkap dengan:
+  - Pemilihan komoditas dengan *auto-kalkulasi* estimasi yield berdasarkan luas lahan dan rata-rata produktivitas
+  - *Auto-estimasi* tanggal panen berdasarkan durasi tanam khas komoditas
+  - *Auto-isi* harga acuan berdasarkan HPP rata-rata komoditas
+  - Sinkronisasi koordinat GPS dari perangkat atau klik peta
+- **Peringatan cuaca** berbasis wilayah untuk komoditas berisiko busuk tinggi
+- **Grading kualitas dengan TensorFlow.js** — unggah foto panen untuk mendapat Grade A/B/C beserta:
+  - Skor intensitas warna (kematangan)
+  - Skor keseragaman ukuran (uniformity)
+  - Skor bebas cacat/bercak (blemish free)
+  - Confidence score dari model neural network
+  - Sampel preset gambar Grade A dan Grade C untuk pengujian cepat
+- **Tabel laporan lahan aktif** dengan status real-time
+- **Sertifikat QR Trace** per lahan — menghasilkan QR code blockchain untuk verifikasi keaslian produk
+- **Rekomendasi pembeli terdekat** dengan skor pencocokan cerdas (0–100%)
+- Alur kerja persetujuan: Petani dapat menerima atau menolak tawaran pembeli
+
+
+### 🛒 Dashboard Pembeli / Koperasi (BuyerView)
+- **Form rilis kebutuhan pasokan** dengan harga penawaran, volume, batas tanggal, dan lokasi gudang
+- *Auto-isi* harga penawaran berdasarkan rata-rata pasar komoditas (+5% untuk merangsang matching)
+- **Market intelligence** — info ketersediaan surplus regional dari data Dinas Pertanian
+- **Tabel daftar permintaan aktif** koperasi
+- **Pre-order matching engine** — daftar lahan petani tercocokkan dengan breakdown skor:
+  - Jarak antar lokasi (km)
+  - Kesesuaian volume (Kg)
+  - Kesesuaian harga (Rp/Kg)
+- Tombol **"Ajukan Kerja Sama"** untuk memulai alur negosiasi kontrak
+- **QR Scanner Simulator** — simulasi scan QR code fisik pada kemasan produk untuk:
+  - Verifikasi keaslian batch panen di blockchain
+  - Membuka sertifikat traceabilitas digital
+  - Animasi laser scanner dengan efek neon corners
+
+### 📊 Dashboard Dinas Pertanian (DinasView)
+Panel tiga tab terintegrasi untuk pengawasan nasional:
+
+**Tab 1 — Indeks Pengawasan Nasional (Monitoring):**
+- 4 kartu KPI: Total Volume Tanam, Total Permintaan Pasar, Food Loss Terselamatkan (Kg + estimasi CO₂ diredam), Kesehatan Alur Distribusi (%)
+- **Custom SVG bar chart** perbandingan produksi vs daya serap per komoditas (tanpa library chart eksternal)
+- **Indeks Risiko Food Loss per wilayah** (Brebes, Garut, Malang, Cianjur) dengan:
+  - Surplus tidak terserap (Kg)
+  - Persentase risiko pembusukan berdasarkan perishability factor komoditas
+  - Badge status: RENDAH / SEDANG (SIAGA) / TINGGI (AWAS)
+  - Rekomendasi kebijakan intervensi armada cold chain
+
+**Tab 2 — Peramalan Time-Series (Forecasting):**
+- Pilihan wilayah dan komoditas secara dinamis
+- **Grafik kurva SVG** proyeksi hasil panen 4 minggu ke depan dengan *shaded confidence band* 95%
+- Garis prediksi solid + batas atas/bawah confidence interval bertitik (dashed)
+- Tabel angka prediksi mingguan (volume, CI lower, CI upper)
+- Indikator tren: UP / DOWN / STABLE + persentase growth rate
+
+**Tab 3 — Optimasi Rute Kolektor (Routing):**
+- Konfigurasi depot (wilayah), kapasitas kendaraan (Kg), dan jumlah armada
+- Tombol jalankan optimasi rute VRP
+- Kartu ringkasan per kendaraan: nama armada, total volume, total jarak, persentase utilisasi
+- Tabel daftar titik berhenti per rute dengan urutan pengambilan optimal
+- Rekap total: semua armada, total titik, total volume, total jarak
+
+### ⚙️ Panel Admin (AdminView)
+- **Kalibrasi bobot algoritma pencocokan** secara real-time via slider:
+  - `w1` Kedekatan Lokasi (default 40%)
+  - `w2` Kesesuaian Volume (default 30%)
+  - `w3` Kesesuaian Harga (default 30%)
+- Validasi otomatis — total bobot harus = 1.00, jika tidak sistem melakukan normalisasi proporsional
+- Tombol reset ke bobot bawaan
+- **Buku besar transaksi platform** — tabel semua pencocokan aktif beserta:
+  - Detail sisi hulu (petani) dan hilir (pembeli)
+  - Skor match dan jarak
+  - Status transaksi (Saran / Sepakat / Sengketa)
+  - Aksi admin: tandai masalah logistik atau selesaikan sengketa
+
+### 🔗 Blockchain Ledger (BlockchainView)
+- Header info jaringan: Tinggi Block terkini, jumlah Smart Contract aktif
+- Tipe consensus: **Proof of Authority**
+- Integritas: **SHA-256 Merkle Hash**
+- Node validator: Dinas, Koperasi, Gapoktan
+- **Daftar semua block** dengan klik untuk inspeksi detail:
+  - Merkle Hash block dan prevHash (chain integrity)
+  - Nonce dan timestamp
+  - List semua transaksi tersegel beserta payload dan cryptographic hash
+- **Manual Mining Tool** — Dinas Pertanian dapat menambahkan blok validasi baru
+- **Global Ledger Explorer** — pencarian transaksi by ID, nama, hash, atau kata kunci payload
+- 5 tipe transaksi: `RILIS_PANEN`, `RILIS_DEMAND`, `MUTASI_KONTRAK`, `KONTRAK_SEPAKAT`, `BLOCK_REWARD`
+
+### 🔍 Sertifikat Traceabilitas (TraceModal)
+- Modal blockchain certificate yang dapat dibuka dari lahan petani atau hasil scan pembeli
+- **QR Code dinamis** berisi URL traceability unik per batch panen
+- Passport produk: nama petani, wilayah, koordinat geospasial, tanggal tanam, estimasi panen, volume
+- Link langsung ke **Google Maps Satelit** berdasarkan koordinat lahan
+- **Timeline audit riwayat blockchain** — semua transaksi terkait batch ini secara kronologis
+- Status Smart Contract escrow jika batch sudah memiliki kontrak terkait
+
+### 🔄 Simulasi Real-Time
+- Setiap **25 detik** sistem secara otomatis membuat:
+  - 55% kemungkinan: laporan tanam baru dari petani simulasi
+  - 45% kemungkinan: rilis demand baru dari koperasi simulasi
+- Mencakup 4 wilayah (Brebes, Garut, Malang, Cianjur) × 7 komoditas
+- Setiap event real-time sekaligus melakukan mining blok baru ke blockchain
+- Notifikasi toast muncul setiap ada aktivitas baru
+
+### 🔔 Sistem Notifikasi Toast
+- Slide-in dari bawah layar dengan animasi Framer Motion
+- 3 tipe: `success` (hijau), `warning` (kuning), `info` (biru)
+- Ikon kontekstual (CheckCircle / AlertCircle / Info)
+- Dapat di-dismiss manual atau auto-dimiss
+
+---
+
+## 🏗️ Arsitektur Sistem
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    SinergiTani Platform                  │
+│                                                         │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌────────┐  │
+│  │  Petani  │  │ Pembeli  │  │  Dinas   │  │ Admin  │  │
+│  │  View    │  │  View    │  │  View    │  │  View  │  │
+│  └────┬─────┘  └────┬─────┘  └────┬─────┘  └───┬────┘  │
+│       │              │              │             │      │
+│  ┌────▼──────────────▼──────────────▼─────────────▼───┐ │
+│  │              AppContext (Global State)              │ │
+│  │  harvests | demands | matches | blockchain          │ │
+│  │  weights | activeRole | notifications               │ │
+│  └───────────────────┬─────────────────────────────────┘ │
+│                      │                                   │
+│  ┌───────────────────▼─────────────────────────────────┐ │
+│  │                 Core Engines                        │ │
+│  │  ┌──────────────┐  ┌──────────────┐  ┌──────────┐  │ │
+│  │  │ Match Engine │  │  Blockchain  │  │ RT Sim.  │  │ │
+│  │  │ (Haversine + │  │  Ledger      │  │ (25s     │  │ │
+│  │  │  Weighted    │  │  (PoA)       │  │  Timer)  │  │ │
+│  │  │  Scoring)    │  └──────────────┘  └──────────┘  │ │
+│  │  └──────────────┘                                   │ │
+│  └─────────────────────────────────────────────────────┘ │
+│                                                         │
+│  ┌─────────────┐  ┌──────────────┐  ┌───────────────┐  │
+│  │ TF.js MLP   │  │ Holt's       │  │ VRP Nearest   │  │
+│  │ CV Grading  │  │ Exponential  │  │ Neighbor      │  │
+│  │ (Browser)   │  │ Smoothing    │  │ Route Optim.  │  │
+│  └─────────────┘  └──────────────┘  └───────────────┘  │
+│                                                         │
+│  ┌─────────────────────────────────────────────────────┐ │
+│  │            Persistence: localStorage               │ │
+│  │  flw_harvests | flw_demands | flw_weights          │ │
+│  │  flw_blockchain | flw_active_role                  │ │
+│  └─────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────┘
+```
+
+
+---
+
+## 🛠️ Teknologi yang Digunakan
+
+### Frontend Core
+| Teknologi | Versi | Kegunaan |
+|---|---|---|
+| **React** | 19.0.1 | Framework UI utama |
+| **TypeScript** | ~5.8.2 | Type safety di seluruh codebase |
+| **Vite** | 6.2.3 | Build tool & dev server (port 3000) |
+| **Tailwind CSS** | 4.1.14 | Utility-first styling via `@tailwindcss/vite` |
+
+### AI & Machine Learning
+| Teknologi | Versi | Kegunaan |
+|---|---|---|
+| **TensorFlow.js** | 4.22.0 | Model MLP grading kualitas tanaman (inferensi di browser) |
+| **@google/genai** | 2.4.0 | Gemini API untuk fitur AI server-side |
+
+### UI & Visualisasi
+| Teknologi | Versi | Kegunaan |
+|---|---|---|
+| **Leaflet.js** | 1.9.4 | Peta interaktif geolokasi |
+| **Motion (Framer Motion)** | 12.23.24 | Animasi transisi antar view dan toast |
+| **Lucide React** | 0.546.0 | Ikon SVG konsisten |
+| **QRCode.React** | 4.2.0 | Generate QR Code sertifikat blockchain |
 
 ### Backend (Opsional)
-- **Express.js** — Server ringan untuk kebutuhan server-side Gemini API
+| Teknologi | Versi | Kegunaan |
+|---|---|---|
+| **Express.js** | 4.21.2 | Server untuk proxy Gemini API server-side |
+| **dotenv** | 17.2.3 | Manajemen variabel lingkungan |
+
+### Dev Tools
+| Teknologi | Versi | Kegunaan |
+|---|---|---|
+| **tsx** | 4.21.0 | Run TypeScript langsung untuk server Express |
+| **esbuild** | 0.25.0 | Bundling server-side |
+| **autoprefixer** | 10.4.21 | PostCSS compatibility |
 
 ---
 
-## Struktur Proyek
+## 📁 Struktur Proyek
 
 ```
 sistem-pengurangan-food-loss/
-├── src/
-│   ├── App.tsx                    # Root komponen, layout utama
-│   ├── main.tsx                   # Entry point React
-│   ├── index.css                  # Stylesheet global
-│   ├── types.ts                   # Definisi tipe TypeScript global
-│   ├── components/
-│   │   ├── Navbar.tsx             # Navigasi & switcher peran
-│   │   ├── InteractiveMap.tsx     # Peta Leaflet geolokasi
-│   │   ├── FarmerView.tsx         # Dashboard Petani
-│   │   ├── BuyerView.tsx          # Dashboard Pembeli
-│   │   ├── DinasView.tsx          # Dashboard Dinas Pertanian
-│   │   ├── AdminView.tsx          # Dashboard Administrator
-│   │   ├── BlockchainView.tsx     # Visualisasi blockchain ledger
-│   │   └── TraceModal.tsx         # Modal traceabilitas produk
-│   ├── context/
-│   │   └── AppContext.tsx         # Global state, matching engine, simulator
-│   └── utils/
-│       ├── cvGrading.ts           # Grading kualitas dengan TensorFlow.js
-│       ├── forecasting.ts         # Prediksi panen Holt's Exponential Smoothing
-│       └── routeOptimizer.ts      # Optimasi rute VRP Nearest Neighbor
-├── index.html
-├── package.json
-├── vite.config.ts
-├── tsconfig.json
-├── metadata.json
-└── .env.example
+│
+├── 📄 index.html                    # HTML entry point
+├── 📄 package.json                  # Dependencies & scripts
+├── 📄 vite.config.ts                # Konfigurasi Vite
+├── 📄 tsconfig.json                 # Konfigurasi TypeScript
+├── 📄 metadata.json                 # Metadata aplikasi & permissions
+├── 📄 .env.example                  # Template variabel lingkungan
+├── 📄 .gitignore
+│
+└── 📁 src/
+    ├── 📄 main.tsx                  # Entry point React (mount ke #root)
+    ├── 📄 App.tsx                   # Root component, layout utama, toast manager
+    ├── 📄 index.css                 # Stylesheet global + custom CSS tokens
+    ├── 📄 types.ts                  # Semua TypeScript type & interface global
+    │
+    ├── 📁 context/
+    │   └── 📄 AppContext.tsx        # Global state (React Context)
+    │                                # • Seed data awal (7 panen, 5 demand)
+    │                                # • Matching engine (scoreMatch)
+    │                                # • Haversine distance calculator
+    │                                # • Blockchain miner (mineBlockWithTransaction)
+    │                                # • Real-time simulator (interval 25s)
+    │                                # • localStorage persistence
+    │
+    ├── 📁 components/
+    │   ├── 📄 Navbar.tsx            # Header sticky + role switcher + reset data
+    │   ├── 📄 InteractiveMap.tsx    # Peta Leaflet dengan marker panen & demand
+    │   ├── 📄 FarmerView.tsx        # Dashboard petani (form, grading, matches)
+    │   ├── 📄 BuyerView.tsx         # Dashboard pembeli (form, scanner, matches)
+    │   ├── 📄 DinasView.tsx         # Dashboard dinas (3 tab: monitor/forecast/route)
+    │   ├── 📄 AdminView.tsx         # Panel admin (weight tuning, transaction log)
+    │   ├── 📄 BlockchainView.tsx    # Blockchain explorer + manual miner
+    │   └── 📄 TraceModal.tsx        # Modal sertifikat & QR code traceability
+    │
+    └── 📁 utils/
+        ├── 📄 cvGrading.ts          # TensorFlow.js MLP grading kualitas
+        ├── 📄 forecasting.ts        # Holt's Exponential Smoothing engine
+        └── 📄 routeOptimizer.ts     # VRP Nearest Neighbor route optimizer
 ```
 
----
-
-## Peran Pengguna
-
-Aplikasi memiliki 5 peran yang dapat dipilih melalui Navbar:
-
-| Peran | Deskripsi |
-|---|---|
-| **PETANI** | Mendaftarkan laporan tanam, mengunggah foto untuk grading kualitas, menyetujui/menolak penawaran dari pembeli |
-| **PEMBELI** | Merilis kebutuhan pasokan komoditas, melihat pencocokan terbaik, mengajukan permintaan kontrak ke petani |
-| **DINAS** | Memantau statistik wilayah, melihat forecasting panen per komoditas, dan laporan optimasi rute logistik |
-| **ADMIN** | Mengatur bobot algoritma pencocokan (lokasi/volume/harga), reset data, manajemen sistem |
-| **BLOCKCHAIN** | Melihat seluruh riwayat transaksi dalam bentuk blok rantai yang dapat diaudit |
-
----
-
-## Algoritma & Model
-
-### 1. Matching Engine (Skor Tertimbang)
-Setiap pasangan panen–permintaan dihitung skornya berdasarkan tiga dimensi:
-- **Skor Lokasi** — Dihitung menggunakan formula Haversine; skor 100 jika ≤5 km, turun linear hingga 0 di 150 km
-- **Skor Volume** — Rasio antara volume yang tersedia dan yang dibutuhkan
-- **Skor Harga** — Perbandingan harga penawaran pembeli terhadap harga harapan petani
-
-```
-Total Score = (wLocation × lokasi) + (wVolume × volume) + (wPrice × harga)
-Default: 40% lokasi | 30% volume | 30% harga
-```
-
-### 2. Forecasting — Holt's Double Exponential Smoothing
-Memperkirakan volume panen per wilayah dan komoditas untuk 4 minggu ke depan, dengan:
-- Faktor musiman bulanan (kemarau/hujan)
-- Confidence interval 95% yang melebar seiring jangkauan waktu
-
-### 3. Grading Kualitas — TensorFlow.js MLP
-Model MLP 2-lapisan yang dilatih di browser:
-- **Input**: 3 fitur visual (skor warna, keseragaman ukuran, bebas cacat) diekstrak dari analisis piksel gambar
-- **Output**: Probabilitas Grade A / B / C
-
-### 4. Optimasi Rute — VRP Nearest Neighbor
-Algoritma greedy berbasis kapasitas kendaraan:
-- Mengurutkan titik pengambilan berdasarkan jadwal panen
-- Memilih titik terdekat yang masih muat di kapasitas kendaraan
-- Menghitung total jarak termasuk kembali ke depot
-
----
-
-## Instalasi & Menjalankan
-
-### Prasyarat
-- Node.js ≥ 18
-- npm ≥ 9
-
-### Langkah Instalasi
-
-```bash
-# 1. Clone atau ekstrak proyek
-cd sistem-pengurangan-food-loss
-
-# 2. Install dependensi
-npm install
-
-# 3. Salin dan isi variabel lingkungan
-copy .env.example .env
-
-# 4. Jalankan dev server
-npm run dev
-```
-
-Aplikasi akan berjalan di `http://localhost:3000`.
-
-### Build Produksi
-
-```bash
-npm run build
-npm run preview
-```
-
----
-
-## Variabel Lingkungan
-
-Salin `.env.example` menjadi `.env` dan isi nilai yang dibutuhkan:
-
-```env
-GEMINI_API_KEY=your_google_gemini_api_key_here
-```
-
-API Key Gemini digunakan untuk fitur analitik berbasis AI pada sisi server. Tanpa API key, fitur AI berbasis cloud tidak akan berfungsi, namun fitur utama (matching, forecasting, grading lokal, blockchain) tetap berjalan sepenuhnya di browser.
-
----
-
-## Lisensi
-
-Proyek ini dilisensikan di bawah **Apache License 2.0**.  
-Lihat berkas header kode sumber untuk detail lengkap.
