@@ -1,4 +1,4 @@
-# 🌾 SinergiTani — Sistem Pengurangan Food Loss & Waste
+#  SinergiTani — Sistem Pengurangan Food Loss & Waste
 
 <div align="center">
 
@@ -38,7 +38,7 @@
 
 ---
 
-## 🌍 Latar Belakang Masalah
+##  Latar Belakang Masalah
 
 Indonesia kehilangan jutaan ton hasil panen setiap tahun akibat:
 
@@ -51,7 +51,7 @@ Indonesia kehilangan jutaan ton hasil panen setiap tahun akibat:
 
 ---
 
-## 🎬 Demo & Screenshot
+##  Demo & Screenshot
 
 > Aplikasi berjalan sepenuhnya di browser — tidak memerlukan instalasi backend khusus untuk fitur inti.
 
@@ -62,15 +62,15 @@ Indonesia kehilangan jutaan ton hasil panen setiap tahun akibat:
 
 ---
 
-## ✨ Fitur Lengkap
+##  Fitur Lengkap
 
-### 🗺️ Peta Interaktif (InteractiveMap)
+### Peta Interaktif (InteractiveMap)
 - Visualisasi titik panen aktif (hijau) dan permintaan pembeli (coklat) secara real-time di peta Jawa
 - Dibangun dengan **Leaflet.js** dengan tile OpenStreetMap
 - Klik pada titik di peta untuk **mengisi koordinat form secara otomatis** (petani & pembeli)
 - Popup informatif menampilkan nama petani/koperasi, komoditas, volume, dan harga saat hover
 
-### 🌱 Dashboard Petani (FarmerView)
+###  Dashboard Petani (FarmerView)
 - **Form laporan rencana tanam** lengkap dengan:
   - Pemilihan komoditas dengan *auto-kalkulasi* estimasi yield berdasarkan luas lahan dan rata-rata produktivitas
   - *Auto-estimasi* tanggal panen berdasarkan durasi tanam khas komoditas
@@ -89,7 +89,7 @@ Indonesia kehilangan jutaan ton hasil panen setiap tahun akibat:
 - Alur kerja persetujuan: Petani dapat menerima atau menolak tawaran pembeli
 
 
-### 🛒 Dashboard Pembeli / Koperasi (BuyerView)
+###  Dashboard Pembeli / Koperasi (BuyerView)
 - **Form rilis kebutuhan pasokan** dengan harga penawaran, volume, batas tanggal, dan lokasi gudang
 - *Auto-isi* harga penawaran berdasarkan rata-rata pasar komoditas (+5% untuk merangsang matching)
 - **Market intelligence** — info ketersediaan surplus regional dari data Dinas Pertanian
